@@ -7,7 +7,7 @@ body {
     color:red;
 }
 .myclass {
-    
+    border: 1px solid black;
 }
 #it2 {
     font-size: 2em;
