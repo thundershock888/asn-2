@@ -7,16 +7,24 @@ body {
     color:red;
 }
 .myclass {
-    border: 1px solid black;
+    
 }
 #it2 {
     font-size: 2em;
 }
 
 img {
-    position:relative;
+    /* position:relative;
     top:100px;
-    left:100px;
+    left:100px; */
     width: 25vw;
+}
+
+table, tr, th, td {
+    border: 1px solid black
+}
+
+table {
+    border-collapse: collapse;
 }
 
