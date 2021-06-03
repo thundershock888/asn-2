@@ -26,6 +26,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -49,8 +52,34 @@ public class Main {
   }
 
   @RequestMapping("/")
-  String index() {
+  String index(Map<String, Object> model) {
+    String name = "Bobby";
+    model.put("name", name);
     return "index";
+  }
+
+  @GetMapping(
+    path = "/person"
+  )
+  public String getPersonForm(Map<String, Object> model){
+    Person person = new Person();  // creates new person object with empty fname and lname
+    model.put("person", person);
+    return "person";
+  }
+
+  @PostMapping(
+    path = "/person",
+    consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
+  )
+  public String handleBrowserPersonSubmit(Person person) throws Exception {
+    // Save the person data into the database
+    System.out.println(person.getFname() + " " + person.getLname());
+    return "redirect:/person/success";
+  }
+
+  @GetMapping("/person/success")
+  public String getPersonSuccess(){
+    return "success";
   }
 
   @RequestMapping("/db")

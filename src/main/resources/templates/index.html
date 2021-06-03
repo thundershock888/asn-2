@@ -4,41 +4,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
   <title>Document</title>
 </head>
 <body>
-  <header>LOGO OR COMPNAY name
-    <nav>
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <p>Paragraph 1
-      
-    </p>
-    <p>Paragraph 2</p>
-    <table>
-      <tr>
-        <th>Name</th> <th>Age</th> <th>Email</th>
-      </tr>
-      <tr>
-        <td>Bobby</td> <td>40</td> <td>bobbyc@sfu.ca</td><td>Extra</td>
-      </tr>
-    </table>
-    <form action="/process_form" method="post">
-      <input type="text" placeholder="Enter name">
-      <input type="date">
-      <input type="password">
-      <input type="submit" value="SUBMIT">
-    </form>
-  </main>
-  <footer>
-    Copyright info
-  </footer>
+  Hello 
+  <p th:text="${name}"></p>
 </body>
 </html>
