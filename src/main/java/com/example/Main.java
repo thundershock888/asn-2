@@ -71,10 +71,20 @@ public class Main {
     path = "/person",
     consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
   )
-  public String handleBrowserPersonSubmit(Person person) throws Exception {
+  public String handleBrowserPersonSubmit(Map<String, Object> model, Person person) throws Exception {
     // Save the person data into the database
-    System.out.println(person.getFname() + " " + person.getLname());
-    return "redirect:/person/success";
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS people (id serial, fname varchar(20), lname varchar(20))");
+      String sql = "INSERT INTO people (fname,lname) VALUES ('" + person.getFname() + "','" + person.getLname() + "')";
+      stmt.executeUpdate(sql);
+      System.out.println(person.getFname() + " " + person.getLname());
+      return "redirect:/person/success";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+
   }
 
   @GetMapping("/person/success")
