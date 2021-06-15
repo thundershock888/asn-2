@@ -110,6 +110,26 @@ public class Main {
     
   }
 
+  // Method 1: uses Path variable to specify person
+  @GetMapping("/person/read/{pid}")
+  public String getSpecificPerson(Map<String, Object> model, @PathVariable String pid){
+    System.out.println(pid);
+    // 
+    // query DB : SELECT * FROM people WHERE id={pid}
+    model.put("id", pid);
+    return "readperson";
+  }
+
+  // Method 2: uses query string to specify person
+  @GetMapping("/person/read")
+  public String getSpecificPerson2(Map<String, Object> model, @RequestParam String pid){
+    System.out.println(pid);
+    // 
+    // query DB : SELECT * FROM people WHERE id={pid}
+    model.put("id", pid);
+    return "readperson";
+  }
+
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
