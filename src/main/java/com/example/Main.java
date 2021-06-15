@@ -78,7 +78,7 @@ public class Main {
       stmt.executeUpdate("CREATE TABLE IF NOT EXISTS people (id serial, fname varchar(20), lname varchar(20))");
       String sql = "INSERT INTO people (fname,lname) VALUES ('" + person.getFname() + "','" + person.getLname() + "')";
       stmt.executeUpdate(sql);
-      System.out.println(person.getFname() + " " + person.getLname());
+      System.out.println(person.getFname() + " " + person.getLname()); // print person on console
       return "redirect:/person/success";
     } catch (Exception e) {
       model.put("message", e.getMessage());
@@ -88,8 +88,26 @@ public class Main {
   }
 
   @GetMapping("/person/success")
-  public String getPersonSuccess(){
-    return "success";
+  public String getPersonSuccess(Map<String, Object> model){
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      ResultSet rs = stmt.executeQuery("SELECT * FROM people");
+
+      ArrayList<String> output = new ArrayList<String>();
+      while (rs.next()) {
+        String fname = rs.getString("fname");
+        String id = rs.getString("id");
+        
+        output.add(id + "," + fname);
+      }
+
+      model.put("records", output);
+      return "success";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+    
   }
 
   @RequestMapping("/db")
