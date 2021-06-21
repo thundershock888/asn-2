@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+Added Sucsessfully!
 <body>
-    Person Added Successfully!
     <div class="container">
-        <h1>Database Output</h1>
+        <h1>Rectangles: </h1>
         <ul th:each="record : ${records}">
-            <li th:text="${record}"/>
+            <a th:href="@{/rectangle/show/{userId}(userId=${record.id})}" th:text="${record.name}"></a>
         </ul>
     </div>
-    <a th:href="@{/person}">PERSON</a>
+    <a th:href="@{/rectangle}"> Add Rectangles</a>
+
+
 </body>
 </html>

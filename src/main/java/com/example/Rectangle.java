@@ -1,6 +1,6 @@
 package com.example;
 
-public class Person {
+public class Rectangle {
     private int id;
     private String name;
     private String color;

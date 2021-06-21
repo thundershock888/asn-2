@@ -7,12 +7,12 @@
     <title>New person Form</title>
 </head>
 <body>
-<form action="#" method="post" th:action="@{/person}" th:object="${person}">
+<form action="#" method="post" th:action="@{/rectangle}" th:object="${rectangle}">
     <input type="text" th:field=*{name} placeholder="name"> <br>
     <input type="text" th:field=*{color} placeholder="color"> <br>
     <input type="text" th:field=*{len} placeholder="len"> <br>
     <input type="text" th:field=*{wid} placeholder="wid"> <br>
-    <input type="submit" value="Submit Person">
+    <input type="submit" value="Submit Rectangle">
 </form>
 </body>
 </html>

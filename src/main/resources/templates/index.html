@@ -7,7 +7,14 @@
   <title>Document</title>
 </head>
 <body>
-  Hello 
-  <p th:text="${name}"></p>
+<div class="container">
+  <h1>Rectangles</h1>
+  <ul th:each="record : ${records}">
+    <a th:href="@{/rectangle/show/{userId}(userId=${record.id})}" th:text="${record.name}"></a>
+  </ul>
+</div>
+<a th:href="@{/rectangle}"> Add Rectangles</a>
+
+
 </body>
 </html>
