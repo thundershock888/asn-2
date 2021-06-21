@@ -45,6 +45,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Main.class, args);
+        //JDBC_DATABASE_URL=postgres://lkjisyxotaoyaw:023f2a00cf73c524f8f6a1522fe5fac25b13bf36ab2b1a0e265d32d0faafe3aa@ec2-34-230-115-172.compute-1.amazonaws.com:5432/d176k9gfud4l8f
     }
 
     @RequestMapping("/")
@@ -156,7 +157,7 @@ public class Main {
         try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1,Integer.parseInt(pid));
             pstmt.executeUpdate();
-            return "index";
+            return "redirect:/rectangle/success";
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return "error";
