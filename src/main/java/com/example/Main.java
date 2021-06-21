@@ -30,10 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Map;
 @Controller
@@ -141,17 +138,30 @@ public class Main {
 
     @GetMapping("/rectangle/delete/{pid}")
     public String deleteSpecificRectangle(Map<String, Object> model, @PathVariable String pid) {
-        System.out.println(pid);
+       /* System.out.println(pid);
 
         try (Connection connection = dataSource.getConnection()) {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("delete FROM rectangles where id = " + pid);
+            stmt.executeQuery("delete FROM rectangles where id = " + pid);
             System.out.println("deleted rect");
             return "index";
         } catch (Exception e) {
+            System.out.println("went into catch");
             model.put("message", e.getMessage());
             return "error";
+
+        }*/
+        String sql = "DELETE FROM rectangles WHERE id = ?";
+
+        try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,Integer.parseInt(pid));
+            pstmt.executeUpdate();
+            return "index";
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return "error";
         }
+
     }
 
     @GetMapping("/rectangle/show/{pid}")
