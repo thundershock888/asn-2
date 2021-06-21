@@ -54,6 +54,7 @@ public class Main {
     String index(Map<String, Object> model) {
         try (Connection connection = dataSource.getConnection()) {
             Statement stmt = connection.createStatement();
+            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS rectangles (id serial, name varchar(20), color varchar(20), area int, len int, wid int)");
             ResultSet rs = stmt.executeQuery("SELECT * FROM rectangles");
 
             ArrayList<Record> output = new ArrayList<Record>();
